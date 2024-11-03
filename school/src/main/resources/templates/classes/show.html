@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Классы</title>
+</head>
+<body>
+
+<b>КЛАССЫ</b>
+
+<div class="main">
+    <div class="list" th:each="clas : ${classes}">
+        <a th:href="@{/school/classes/{id}(id=${clas.getId()})}"
+           th:text="${clas.getName()}">class</a>
+    </div>
+    <div class="list">
+        <a th:href="@{/school/classes/new}"><b>Добавить класс</b></a>
+    </div>
+    <div class="button">
+        <a th:href="@{/school/schedule}">Расписание уроков</a>
+    </div>
+    <div class="list">
+        <a th:href="@{/school}">На главную страницу</a>
+    </div>
+</div>
+</body>
+</html>

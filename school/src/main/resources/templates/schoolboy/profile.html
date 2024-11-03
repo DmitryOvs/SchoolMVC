@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+
+<b>ХАРАКТЕРИСТИКА УЧАЩЕГОСЯ</b>
+<div class="frame">
+    <b>Фамилия и имя ученика</b>
+    <p th:text="${schoolboy.getName()}">schoolboy</p>
+    <br>
+    <b>Возраст</b>
+    <p th:text="${schoolboy.getYear()}">schoolboy</p>
+    <br>
+    <b>Адресс электронной почты</b>
+    <p th:text="${schoolboy.getEmail()}">schoolboy</p>
+    <br>
+    <b>Успеваемасть</b>
+    <p th:text="${schoolboy.getSchoolboycol()}">schoolboy</p>
+    <br>
+    <b>Создание новой анкеты учащегося</b>
+    <p th:text="${schoolboy.getCreateDate()}">schoolboy</p>
+    <br>
+    <b>Последнее изменения в анкете ученика</b>
+    <p th:text="${schoolboy.getModifyDate()}">schoolboy</p>
+    <br>
+    <div th:if="${klass.getName()}">
+        <p th:text="'Ученик учится в: ' + ${klass.getName()}"></p>
+        <form th:method="PATCH" th:action="@{/school/schoolboy/{id}/free(id=${schoolboy.getId()})}">
+            <input type="submit" class="button" value="Закончить учебный год в этом классе"/>
+        </form>
+    </div>
+
+    <div th:unless="${klass.getName()}">
+        <p>Перевести ученика в</p>
+        <form th:method="PATCH" th:action="@{/school/schoolboy/{id}/сlasses(id=${schoolboy.getId()})}">
+            <label for="class">Выберите класс в который переходит учащийся</label>
+            <select th:object="${klass}" th:field="*{id}" id="class">
+                <option th:each="clas : ${classes}" th:value="${clas.getId()}"
+                        th:text="${clas.getName()}"></option>
+            </select>
+            <input type="submit" class="button" value="Назначить класс"/>
+        </form>
+    </div>
+
+    <hr/>
+    <form th:method="GET" th:action="@{/school/schoolboy/{id}/edit(id=${schoolboy.getId()})}">
+        <input type="submit" class="button" value="Внести изменения в профель ученика"/>
+    </form>
+    <form th:method="DELETE" th:action="@{/school/schoolboy/{id}(id=${schoolboy.getId()})}">
+        <input type="submit" class="button" value="Удалить ученика"/>
+    </form>
+    <hr/>
+    <div class="btn-group">
+        <div class="button">
+            <a th:href="@{/school/classes}">Все классы</a>
+        </div>
+        <div class="button">
+            <a th:href="@{/school/schoolboy}">Все учащиеся</a>
+        </div>
+        <div class="button">
+            <a th:href="@{/school/schedule}">Расписание уроков</a>
+        </div>
+        <div class="button">
+            <a th:href="@{/school}">На главную</a>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

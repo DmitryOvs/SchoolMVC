@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Новое</title>
+</head>
+<body>
+
+<b>НОВОЕ РАСПИСАНИЕ ДЛЯ КЛАССА</b>
+
+<div class="frame">
+  <form th:method="POST" th:action="@{/school/schedule}" th:object="${schedule}">
+    <label for="name">Введите название рассписания:</label>
+    <input type="text" th:field="*{name}" id="name">
+    <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
+    <br/>
+    <input type="submit" class="button" value="Добавить расписание">
+  </form>
+  <hr/>
+  <div class="btn-group">
+    <div class="button">
+      <a th:href="@{/school/classes}">Все классы</a>
+    </div>
+    <div class="button">
+      <a th:href="@{/school/schoolboy}">Все учащиеся</a>
+    </div>
+    <div class="button">
+      <a th:href="@{/school/schedule}">Расписание уроков</a>
+    </div>
+    <div class="button">
+      <a th:href="@{/school}">На главную</a>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>

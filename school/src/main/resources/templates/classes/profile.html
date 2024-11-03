@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+
+<b>СПИСОК УЧЕНИКОВ В КЛАССЕ</b>
+
+<div class="frame">
+    <p th:text="${clas.getName()}">clas</p>
+    <br>
+
+    <div th:if="${schedules}">
+        <hr/>
+        <p><b>Классное расписание</b></p>
+        <div th:each="schedule : ${schedules}">
+            <br>
+            <a th:text="${schedule.getName()}">schedule</a>
+            <br>
+        </div>
+    </div>
+    <div th:unless="${schedules}">
+        <p>Для данного класса нет актуального расписания</p>
+    </div>
+    <br>
+    <hr/>
+    <div th:if="${pupils}">
+        <hr/>
+        <p><b>Фамилия и имя учащихся:</b></p>
+        <div th:each="schoolboy : ${pupils}">
+            <br>
+            <a th:text="${schoolboy.getName()}">schoolboy</a>
+            <br>
+        </div>
+    </div>
+    <div th:unless="${pupils}">
+        <p>В классе еще нет ни одного ученика</p>
+    </div>
+    <br>
+    <hr/>
+    <form th:method="GET" th:action="@{/school/classes/{id}/edit(id=${clas.getId()})}">
+        <input type="submit" class="button" value="Внести изменения в профель класса"/>
+    </form>
+    <form th:method="DELETE" th:action="@{/school/classes/{id}(id=${clas.getId()})}">
+        <input type="submit" class="button" value="Удалить класс"/>
+    </form>
+    <hr/>
+    <div class="btn-group">
+        <div class="button">
+            <a th:href="@{/school/classes}">Все классы</a>
+        </div>
+        <div class="button">
+            <a th:href="@{/school/schoolboy}">Все учащиеся школы</a>
+        </div>
+        <div class="button">
+            <a th:href="@{/school/schedule}">Расписание уроков</a>
+        </div>
+        <div class="button">
+            <a th:href="@{/school}">На главную</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

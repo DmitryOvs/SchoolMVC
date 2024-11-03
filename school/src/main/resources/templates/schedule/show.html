@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Расписание</title>
+</head>
+<body>
+
+<b>РАСПИСАНИЕ УРОКОВ</b>
+
+<div class="main">
+    <div class="list" th:each="schedule : ${scheduleS}">
+        <a th:href="@{/school/schedule/{id}(id=${schedule.getId()})}"
+           th:text="${schedule.getName()}">class</a>
+    </div>
+    <div class="list">
+        <a th:href="@{/school/schedule/new}"><b>Добавить расписание уроков</b></a>
+    </div>
+    <div class="list">
+        <a th:href="@{/school}">На главную страницу</a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+
+<b>КЛАСНОЕ РАСПИСАНИЕ</b>
+<div class="frame">
+    <p th:text="${schedule.getName()}">schoolboy</p>
+    <br>
+
+    <div th:if="${glass.getName()}">
+        <p th:text="'Расписание для : ' + ${glass.getName()} + ' класса'"></p>
+        <form th:method="PATCH" th:action="@{/school/schedule/{id}/free(id=${schedule.getId()})}">
+            <input type="submit" class="button" value="Убрать расписание для этого класса"/>
+        </form>
+    </div>
+
+    <div th:unless="${glass.getName()}">
+        <p>Назначить расписание</p>
+        <form th:method="PATCH" th:action="@{/school/schedule/{id}/сlasses(id=${schedule.getId()})}">
+            <label for="classes">Выберите для какого класса назначить расписание</label>
+            <select th:object="${glass}" th:field="*{id}" id="classes">
+                <option th:each="classes : ${classe}" th:value="${classes.getId()}"
+                        th:text="${classes.getName()}"></option>
+            </select>
+            <input type="submit" class="button" value="Назначить класс"/>
+        </form>
+    </div>
+
+    <hr/>
+    <form th:method="GET" th:action="@{/school/schedule/{id}/edit(id=${schedule.getId()})}">
+        <input type="submit" class="button" value="Внести изменения в классное расписание"/>
+    </form>
+    <form th:method="DELETE" th:action="@{/school/schedule/{id}(id=${schedule.getId()})}">
+        <input type="submit" class="button" value="Удалить расписание"/>
+    </form>
+    <hr/>
+    <div class="btn-group">
+        <div class="button">
+            <a th:href="@{/school/classes}">Все классы</a>
+        </div>
+        <div class="button">
+            <a th:href="@{/school/schoolboy}">Все учащиеся</a>
+        </div>
+        <div class="button">
+            <a th:href="@{/school/schedule}">Расписание уроков</a>
+        </div>
+        <div class="button">
+            <a th:href="@{/school}">На главную</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

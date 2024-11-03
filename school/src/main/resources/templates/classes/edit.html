@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование</title>
+</head>
+<body>
+
+<b>ВНЕСЕНИЕ ИЗМЕНЕНИЙ СПИСОК КЛАССОВ</b>
+
+<div class="frame">
+    <form th:method="PATCH" th:action="@{/school/classes/{id}(id=${clas.getId()})}" th:object="${clas}">
+        <label for="name">Введите название класса:</label>
+        <input type="text" th:field="*{name}" id="name">
+        <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
+        <br/>
+
+        <input type="submit" class="button" value="Редактировать">
+    </form>
+    <hr/>
+    <div class="btn-group">
+        <div class="button">
+            <a th:href="@{/school/classes}">Список классов</a>
+        </div>
+        <div class="button">
+            <a th:href="@{/school/schoolboy}">Все учащиеся школы</a>
+        </div>
+        <div class="button">
+            <a th:href="@{/school/schedule}">Расписание уроков</a>
+        </div>
+        <div class="button">
+            <a th:href="@{/school}">На главную</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

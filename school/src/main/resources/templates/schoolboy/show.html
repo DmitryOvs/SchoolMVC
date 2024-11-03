@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Учащиеся</title>
+</head>
+<body>
+<b>УЧАЩИЕСЯ ШКОЛЫ</b>
+<div class="main">
+    <br>
+    <div class="list" th:each="schoolboy : ${pupils}">
+        <a th:href="@{/school/schoolboy/{id}(id=${schoolboy.getId()})}"
+           th:text="${schoolboy.getName()} + ', ' + ${schoolboy.getYear()}">ученик</a>
+    </div>
+    <br>
+    <br>
+    <div class="list">
+        <a th:href="@{/school/schoolboy/new}"><b>Добавить учащегося</b></a>
+    </div>
+    <div class="list">
+        <a th:href="@{/school/schoolboy/search}"><b>Найти учащегося по фамилии</b></a>
+    </div>
+    <div class="button">
+        <a th:href="@{/school/schedule}">Расписание уроков</a>
+    </div>
+    <div class="list">
+        <a th:href="@{/school}">На главную страницу</a>
+    </div>
+    <div class="break"></div>
+    <br>
+    <b>Фильтрация</b>
+    <div class="frame queries">
+        <form th:method="GET" th:action="@{/school/schoolboy}">
+            <label for="page">Номер страницы:</label>
+            <input th:type="text" id="page" name="page" th:size="3"/>
+            <br>
+            <label for="schoolboyOnPage">Количество учащихся на странице:</label>
+            <input th:type="text" id="schoolboyOnPage" name="schoolboyOnPage" th:size="2"/>
+            <br>
+            <label for="sortByName">Отсортировать по имени?</label>
+            <select th:type="text" id="sortByName" name="sortByName">
+                <option disabled selected value>----</option>
+                <option th:value="true" th:text="Да"></option>
+                <option th:value="false" th:text="Нет"></option>
+            </select>
+            <br>
+            <input type="submit" class="button" value="Разбить на страницы">
+        </form>
+        <hr/>
+        <a style="text-decoration: none"
+           th:href="@{/school/schoolboy}" class="button">Убрать сортировку и разбиение</a>
+    </div>
+</div>
+</body>
+</html>

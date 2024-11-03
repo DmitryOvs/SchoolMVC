@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Поиск</title>
+</head>
+<body>
+<div class="frame">
+    <form th:method="GET" th:action="@{/school/schoolboy/search}">
+        <label for="startString">Введите поисковый запрос:</label>
+        <input th:type="text" id="startString" th:name="startString">
+        <br/>
+        <input type="submit" class="button" value="Искать ученика">
+    </form>
+    <div th:if="${pupils}">
+        <div th:if="${pupils.isEmpty()}">
+            <br>
+            <p>Ученика не найдено</p>
+            <br>
+        </div>
+        <div th:each="schoolboy : ${pupils}">
+            <br>
+            <b>Фамилия и имя ребенка</b>
+            <a th:text="${schoolboy.getName()}">schoolboy</a>
+            <br>
+            <b>Средняя оценка</b>
+            <a th:text="${schoolboy.getSchoolboycol()}">schoolboy</a>
+            <br>
+            <b>Интернет ящик</b>
+            <a th:text="${schoolboy.getEmail()}">schoolboy</a>
+            <br>
+            <b>Возраст</b>
+            <a th:text="${schoolboy.getYear()}">schoolboy</a>
+            <br>
+            <b> Даты внесения и изменения данных</b>
+            <a th:text="${schoolboy.getCreateDate()} + ', ' + ${schoolboy.getModifyDate()}">schoolboy</a>
+
+            <div th:if="${schoolboy.getKlass()}">
+                <p th:text="'Учащийся сейчас учится в: ' + ${schoolboy.getKlass().getName()} + ' классе'">schoolboy</p>
+            </div>
+            <br>
+        </div>
+    </div>
+    <hr/>
+    <div class="btn-group">
+        <div class="button">
+            <a th:href="@{/school/classes}">Все классы</a>
+        </div>
+        <div class="button">
+            <a th:href="@{/school/schoolboy}">Все ученики</a>
+        </div>
+        <div class="button">
+            <a th:href="@{/school/schedule}">Расписание уроков</a>
+        </div>
+        <div class="button">
+            <a th:href="@{/school}">На главную</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

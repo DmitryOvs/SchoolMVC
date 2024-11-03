@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование</title>
+</head>
+<body>
+
+<b>ВНЕСЕНИЕ ИЗМЕНЕНИЙ АНКЕТУ УЧАЩЕГОСЯ</b>
+
+<div class="frame">
+    <form th:method="PATCH" th:action="@{/school/schoolboy/{id}(id=${schoolboy.getId()})}" th:object="${schoolboy}">
+
+        <label for="name">Введите Фамилию и Имя:</label>
+        <input type="text" th:field="*{name}" id="name">
+        <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
+        <br/>
+        <label for="name">Введите среднюю оценку:</label>
+        <input type="text" th:field="*{schoolboycol}" id="schoolboycol">
+        <div class="error" th:if="${#fields.hasErrors('schoolboycol')}" th:errors="*{schoolboycol}">Schoolboycol error</div>
+        <br/>
+        <label for="name">Введите EMAIL:</label>
+        <input type="text" th:field="*{email}" id="email">
+        <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
+        <br/>
+        <label for="name">Введите возрост:</label>
+        <input type="text" th:field="*{year}" id="year">
+        <div class="error" th:if="${#fields.hasErrors('year')}" th:errors="*{year}">Year error</div>
+        <br/>
+
+
+
+        <input type="submit" class="button" value="Редактировать">
+    </form>
+    <hr/>
+    <div class="btn-group">
+        <div class="button">
+            <a th:href="@{/school/classes}">Список классов</a>
+        </div>
+        <div class="button">
+            <a th:href="@{/school/schoolboy}">Все учащиеся школы</a>
+        </div>
+        <div class="button">
+            <a th:href="@{/school/schedule}">Расписание уроков</a>
+        </div>
+        <div class="button">
+            <a th:href="@{/school}">На главную</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
