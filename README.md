@@ -1,0 +1,1 @@
+The first educational RECT MVC application that I wrote. The project was built using Spring Boot 3 and Maven. The project assumes that there is a SCHOOL and there are CLASSES in it and each CLASS has a class schedule and a list of schoolboys.
